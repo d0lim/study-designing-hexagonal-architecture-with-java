@@ -2,7 +2,7 @@
 
 ## What is this repository for?
 
-- This repository is example code for the
+- This repository has example code for the
   book [Designing Hexagonal Architecture with Java](https://www.packtpub.com/product/designing-hexagonal-architecture-with-java-and-quarkus/9781801816489?utm_source=github&utm_medium=repository&utm_campaign=9781801816489).
 - Original code example repository
   is [here](https://github.com/PacktPublishing/Designing-Hexagonal-Architecture-with-Java).
