@@ -9,7 +9,7 @@ import java.io.InputStreamReader
 
 object RouterViewFileAdapter : RouterViewOutputPort {
     override fun fetchRouters(): List<Router> {
-        TODO("Not yet implemented")
+        return readFileAsString()
     }
 
     private fun readFileAsString(): List<Router> {
