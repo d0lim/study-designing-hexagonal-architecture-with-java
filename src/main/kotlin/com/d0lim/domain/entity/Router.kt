@@ -26,7 +26,7 @@ data class Router(
     fun createNetwork(address: IP, name: String, cidr: Int) =
         Network(address, name, cidr)
 
-    fun retrieveNetwork(): List<Network> {
+    fun retrieveNetworks(): List<Network> {
         return networkSwitch.networks
     }
 }
