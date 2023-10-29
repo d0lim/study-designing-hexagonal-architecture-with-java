@@ -1,6 +1,6 @@
-package com.d0lim.application.ports.`in`
+package com.d0lim.application.ports.input
 
-import com.d0lim.application.ports.out.RouterViewOutputPort
+import com.d0lim.application.ports.output.RouterViewOutputPort
 import com.d0lim.application.usecases.RouterViewUseCase
 import com.d0lim.domain.entity.Router
 import com.d0lim.domain.service.RouterSearch

@@ -1,4 +1,4 @@
-package com.d0lim.application.ports.out
+package com.d0lim.application.ports.output
 
 import com.d0lim.domain.entity.Router
 
