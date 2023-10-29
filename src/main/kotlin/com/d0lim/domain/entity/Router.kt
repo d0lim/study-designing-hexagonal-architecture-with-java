@@ -8,7 +8,7 @@ import com.d0lim.domain.vo.RouterType
 data class Router(
     private val routerId: RouterId,
     val routerType: RouterType,
-    private val networkSwitch: Switch,
+    private val networkSwitch: Switch? = null,
 ) {
     companion object {
         fun filterRouterByType(routerType: RouterType): (Router) -> Boolean =
@@ -20,13 +20,13 @@ data class Router(
     }
 
     fun addNetworkToSwitch(network: Network) {
-        this.networkSwitch.addNetwork(network)
+        this.networkSwitch?.addNetwork(network)
     }
 
     fun createNetwork(address: IP, name: String, cidr: Int) =
         Network(address, name, cidr)
 
     fun retrieveNetworks(): List<Network> {
-        return networkSwitch.networks
+        return networkSwitch?.networks ?: emptyList()
     }
 }
