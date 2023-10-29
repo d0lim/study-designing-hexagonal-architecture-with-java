@@ -6,10 +6,10 @@ data class RouterId(
     val id: UUID,
 ) {
     companion object {
-        fun RouterId.withId(id: String) =
+        fun withId(id: String) =
             RouterId(UUID.fromString(id))
 
-        fun RouterId.withoutId() =
+        fun withoutId() =
             RouterId(UUID.randomUUID())
     }
 }
