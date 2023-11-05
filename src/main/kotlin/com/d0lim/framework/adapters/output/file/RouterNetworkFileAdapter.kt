@@ -11,11 +11,11 @@ import com.d0lim.domain.vo.SwitchId
 import com.d0lim.domain.vo.SwitchType
 
 object RouterNetworkFileAdapter : RouterNetworkOutputPort {
+    private val routers: MutableList<Router> = mutableListOf()
+
     init {
         createSampleRouters()
     }
-
-    private val routers = mutableListOf<Router>()
 
     override fun fetchRouterById(routerId: RouterId): Router {
         return routers.find { it.routerId == routerId }
