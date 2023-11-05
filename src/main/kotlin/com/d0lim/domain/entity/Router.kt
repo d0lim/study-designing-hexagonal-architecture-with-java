@@ -6,7 +6,7 @@ import com.d0lim.domain.vo.RouterId
 import com.d0lim.domain.vo.RouterType
 
 data class Router(
-    private val routerId: RouterId,
+    val routerId: RouterId,
     val routerType: RouterType,
     private val networkSwitch: Switch? = null,
 ) {

@@ -6,6 +6,7 @@ import com.d0lim.domain.specification.NetworkAvailabilitySpecification
 import com.d0lim.domain.vo.IP
 import com.d0lim.domain.vo.Network
 import com.d0lim.domain.vo.RouterId
+import com.d0lim.framework.adapters.output.file.RouterNetworkFileAdapter
 import io.kotest.core.spec.style.BehaviorSpec
 
 class AddNetworkSteps : BehaviorSpec({
@@ -14,7 +15,7 @@ class AddNetworkSteps : BehaviorSpec({
         val network = Network(IP("20.0.0.0"), "Marketing", 8)
 
         `when`("I found the router") {
-            val router: Router = routerNetworkFileAdapter.fetchRouterById(routerId)
+            val router: Router = RouterNetworkFileAdapter.fetchRouterById(routerId)
 
             and("The network address is valida dn doesn't already exist") {
                 val availabilitySpec = NetworkAvailabilitySpecification(
