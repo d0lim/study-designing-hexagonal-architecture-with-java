@@ -10,3 +10,5 @@
 ## Difference between original code example
 
 - I am writing the whole code with Kotlin.
+- I am using [Kotest](https://kotest.io) for BDD specification, while original code
+  uses [Cucumber](https://cucumber.io).
