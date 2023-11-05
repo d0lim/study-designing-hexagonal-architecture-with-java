@@ -8,6 +8,6 @@ class CIDRSpecification : AbstractSpecification<Int>() {
     }
 
     override fun isSatisfiedBy(cidr: Int): Boolean {
-        return cidr > MINIMUM_ALLOWED_CIDR
+        return cidr >= MINIMUM_ALLOWED_CIDR
     }
 }

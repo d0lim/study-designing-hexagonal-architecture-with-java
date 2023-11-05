@@ -6,10 +6,10 @@ data class SwitchId(
     val id: UUID,
 ) {
     companion object {
-        fun SwitchId.withId(id: String) =
+        fun withId(id: String) =
             SwitchId(UUID.fromString(id))
 
-        fun SwitchId.withoutId() =
+        fun withoutId() =
             SwitchId(UUID.randomUUID())
     }
 }
