@@ -25,14 +25,14 @@ class RouterNetworkFileAdapter private constructor() : RouterNetworkOutputPort {
         }
     }
 
-    init {
-        readJsonFile()
-    }
-
     private var routers: List<RouterJson>? = null
     private var resource: InputStream = javaClass.getClassLoader().getResourceAsStream("inventory.json")
         ?: throw RuntimeException("failed to read inventory.json")
     private var objectMapper: ObjectMapper = ObjectMapper()
+
+    init {
+        readJsonFile()
+    }
 
     override fun fetchRouterById(routerId: RouterId): Router {
         return routers?.firstOrNull { it.routerId == routerId.id }?.let { toDomain(it) }
