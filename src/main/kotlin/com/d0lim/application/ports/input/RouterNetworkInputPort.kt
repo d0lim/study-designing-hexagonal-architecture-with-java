@@ -8,7 +8,7 @@ import com.d0lim.domain.vo.Network
 import com.d0lim.domain.vo.RouterId
 
 class RouterNetworkInputPort(
-    private val routerNetworkOutputPort: RouterNetworkOutputPort
+    private val routerNetworkOutputPort: RouterNetworkOutputPort,
 ) : RouterNetworkUseCase {
     override fun addNetworkToRouter(routerId: RouterId, network: Network): Router {
         val router = fetchRouter(routerId)

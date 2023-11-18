@@ -2,6 +2,14 @@ val kotestVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.9.0"
+    kotlin("plugin.jpa") version "1.9.0"
+    kotlin("plugin.allopen") version "1.9.0"
+}
+
+allOpen {
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.Embeddable")
+    annotation("jakarta.persistence.MappedSuperclass")
 }
 
 group = "com.d0lim"
@@ -12,6 +20,12 @@ repositories {
 }
 
 dependencies {
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.16.0")
+    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+    implementation("org.hibernate.orm:hibernate-core:6.3.1.Final")
+
+    runtimeOnly("com.h2database:h2:2.2.224")
+
     testImplementation(kotlin("test"))
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
@@ -23,5 +37,5 @@ tasks.withType<Test>().configureEach {
 }
 
 kotlin {
-    jvmToolchain(8)
+    jvmToolchain(17)
 }

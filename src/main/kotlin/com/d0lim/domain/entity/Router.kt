@@ -8,7 +8,7 @@ import com.d0lim.domain.vo.RouterType
 data class Router(
     val routerId: RouterId,
     val routerType: RouterType,
-    private val networkSwitch: Switch? = null,
+    val networkSwitch: Switch? = null,
 ) {
     companion object {
         fun filterRouterByType(routerType: RouterType): (Router) -> Boolean =

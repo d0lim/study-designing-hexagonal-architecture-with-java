@@ -2,36 +2,64 @@ package com.d0lim.framework.adapters.output.file
 
 import com.d0lim.application.ports.output.RouterNetworkOutputPort
 import com.d0lim.domain.entity.Router
-import com.d0lim.domain.entity.Switch
-import com.d0lim.domain.vo.IP
-import com.d0lim.domain.vo.Network
 import com.d0lim.domain.vo.RouterId
-import com.d0lim.domain.vo.RouterType
-import com.d0lim.domain.vo.SwitchId
-import com.d0lim.domain.vo.SwitchType
+import com.d0lim.framework.adapters.output.file.json.RouterJson
+import com.d0lim.framework.adapters.output.file.mappers.RouterJsonFileMapper.toDomain
+import com.d0lim.framework.adapters.output.file.mappers.RouterJsonFileMapper.toJson
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
+import java.io.File
+import java.io.IOException
+import java.io.InputStream
+import java.nio.file.Paths
 
-object RouterNetworkFileAdapter : RouterNetworkOutputPort {
-    private val routers: MutableList<Router> = mutableListOf()
+class RouterNetworkFileAdapter private constructor() : RouterNetworkOutputPort {
+
+    companion object {
+        private var instance: RouterNetworkFileAdapter? = null
+
+        fun getInstance(): RouterNetworkFileAdapter {
+            return instance ?: RouterNetworkFileAdapter().also {
+                instance = it
+            }
+        }
+    }
+
+    private var routers: List<RouterJson>? = null
+    private var resource: InputStream = javaClass.getClassLoader().getResourceAsStream("inventory.json")
+        ?: throw RuntimeException("failed to read inventory.json")
+    private var objectMapper: ObjectMapper = ObjectMapper()
 
     init {
-        createSampleRouters()
+        readJsonFile()
     }
 
     override fun fetchRouterById(routerId: RouterId): Router {
-        return routers.find { it.routerId == routerId }
-            ?: throw RuntimeException("Failed to find router with routerId: $routerId")
+        return routers?.firstOrNull { it.routerId == routerId.id }?.let { toDomain(it) }
+            ?: throw RuntimeException("router with id $routerId not found")
     }
 
     override fun persistRouter(router: Router): Boolean {
-        return this.routers.add(router)
+        val routerJson = toJson(router)
+        try {
+            val localDir = Paths.get("").toAbsolutePath().toString()
+            val file = File("$localDir/inventory.json")
+            file.delete()
+            objectMapper!!.writeValue(file, routerJson)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return true
     }
 
-    private fun createSampleRouters() {
-        val routerId = RouterId.withId("ca23800e-9b5a-11eb-a8b3-0242ac130003")
-        val network = Network(IP("10.0.0.0"), "HR", 8)
-        val networkSwitch =
-            Switch(SwitchId.withoutId(), SwitchType.LAYER3, mutableListOf(network), IP("9.0.0.9"))
-        val router = Router(routerId, RouterType.EDGE, networkSwitch)
-        routers.add(router)
+    private fun readJsonFile() {
+        try {
+            routers = objectMapper.readValue(
+                resource,
+                object : TypeReference<List<RouterJson>>() {},
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
