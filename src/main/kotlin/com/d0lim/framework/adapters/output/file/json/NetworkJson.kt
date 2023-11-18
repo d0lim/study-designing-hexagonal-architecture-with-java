@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 data class NetworkJson(
-    @JsonProperty
+    @JsonProperty("ip")
     val ip: IPJson,
     @JsonProperty("networkName")
     val networkName: String,
