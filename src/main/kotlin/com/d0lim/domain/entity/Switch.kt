@@ -6,10 +6,10 @@ import com.d0lim.domain.vo.SwitchId
 import com.d0lim.domain.vo.SwitchType
 
 data class Switch(
-    private val switchId: SwitchId,
-    private val switchType: SwitchType,
+    val switchId: SwitchId,
+    val switchType: SwitchType,
     var networks: MutableList<Network>,
-    private val address: IP,
+    val address: IP,
 ) {
     fun addNetwork(network: Network) {
         networks.add(network)

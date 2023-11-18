@@ -2,6 +2,14 @@ val kotestVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.9.0"
+    kotlin("plugin.jpa") version "1.9.0"
+    kotlin("plugin.allopen") version "1.9.0"
+}
+
+allOpen {
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.Embeddable")
+    annotation("jakarta.persistence.MappedSuperclass")
 }
 
 group = "com.d0lim"
@@ -29,5 +37,5 @@ tasks.withType<Test>().configureEach {
 }
 
 kotlin {
-    jvmToolchain(8)
+    jvmToolchain(17)
 }

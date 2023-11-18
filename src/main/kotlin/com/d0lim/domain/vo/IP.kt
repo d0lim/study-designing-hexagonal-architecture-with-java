@@ -1,7 +1,7 @@
 package com.d0lim.domain.vo
 
 data class IP(
-    private val address: String,
+    val address: String,
 ) {
 
     private val protocol: Protocol
