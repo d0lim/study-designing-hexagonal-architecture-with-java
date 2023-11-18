@@ -12,3 +12,5 @@
 - I am writing the whole code with Kotlin.
 - I am using [Kotest](https://kotest.io) for BDD specification, while original code
   uses [Cucumber](https://cucumber.io).
+- I am using Hibernate instead of EclipseLink. Which is the more common implementation for JPA.
+- Failed to run the ch04 rest adapter with h2 database. Any helps are welcome.
