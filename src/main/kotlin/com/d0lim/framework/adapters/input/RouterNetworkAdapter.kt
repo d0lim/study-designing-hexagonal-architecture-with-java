@@ -9,7 +9,7 @@ import com.d0lim.domain.vo.RouterId
 abstract class RouterNetworkAdapter(
     private val routerNetworkUseCase: RouterNetworkUseCase,
 ) {
-    protected lateinit var router: Router
+    protected var router: Router? = null
 
     protected fun addNetworkToRouter(params: Map<String, String>): Router {
         val routerId = RouterId.withId(params["routerId"] ?: throw RuntimeException("routerId not provided"))
@@ -22,5 +22,5 @@ abstract class RouterNetworkAdapter(
         return routerNetworkUseCase.addNetworkToRouter(routerId, network)
     }
 
-    abstract fun processRequest(requestParams: Any): Router
+    abstract fun processRequest(requestParams: Any): Router?
 }

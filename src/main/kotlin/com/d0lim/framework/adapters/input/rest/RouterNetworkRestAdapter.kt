@@ -15,7 +15,7 @@ class RouterNetworkRestAdapter(
     private val routerNetworkUseCase: RouterNetworkUseCase,
 ) : RouterNetworkAdapter(routerNetworkUseCase) {
 
-    override fun processRequest(requestParams: Any): Router {
+    override fun processRequest(requestParams: Any): Router? {
         val params: MutableMap<String, String> = HashMap()
         if (requestParams is HttpServer) {
             requestParams.createContext("/network/add") { exchange: HttpExchange ->
@@ -24,7 +24,7 @@ class RouterNetworkRestAdapter(
                     httpParams(query, params)
                     router = addNetworkToRouter(params)
                     val mapper = ObjectMapper()
-                    val routerJson = mapper.writeValueAsString(RouterJsonFileMapper.toJson(router))
+                    val routerJson = mapper.writeValueAsString(RouterJsonFileMapper.toJson(router!!))
                     exchange.responseHeaders["Content-Type"] = "application/json"
                     exchange.sendResponseHeaders(200, routerJson.toByteArray().size.toLong())
                     val output = exchange.responseBody

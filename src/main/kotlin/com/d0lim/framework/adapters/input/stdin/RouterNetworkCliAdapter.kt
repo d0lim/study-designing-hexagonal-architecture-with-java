@@ -18,12 +18,12 @@ class RouterNetworkCliAdapter(
         return routerNetworkUseCase.addNetworkToRouter(routerId, network)
     }
 
-    override fun processRequest(requestParams: Any): Router {
+    override fun processRequest(requestParams: Any): Router? {
         val params = stdinParams(requestParams)
         router = addNetworkToRouter(params)
         val mapper = ObjectMapper()
         try {
-            val routerJson = mapper.writeValueAsString(RouterJsonFileMapper.toJson(router))
+            val routerJson = mapper.writeValueAsString(RouterJsonFileMapper.toJson(router!!))
             println(routerJson)
         } catch (e: JsonProcessingException) {
             e.printStackTrace()
