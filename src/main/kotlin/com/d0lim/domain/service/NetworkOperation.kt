@@ -16,7 +16,7 @@ class NetworkOperation {
             val routerTypeSpec = RouterTypeSpecification()
             val amountSpec = NetworkAmountSpecification()
 
-            require(!cidrSpec.isSatisfiedBy(network.cidr)) { "CIDR is below " + CIDRSpecification.MINIMUM_ALLOWED_CIDR }
+            require(cidrSpec.isSatisfiedBy(network.cidr)) { "CIDR is below " + CIDRSpecification.MINIMUM_ALLOWED_CIDR }
 
             require(availabilitySpec.isSatisfiedBy(router)) { "Address already exist" }
 
